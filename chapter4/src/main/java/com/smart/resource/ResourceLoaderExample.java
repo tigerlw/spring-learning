@@ -2,6 +2,7 @@ package com.smart.resource;
 
 import java.io.IOException;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -18,6 +19,16 @@ public class ResourceLoaderExample
 		for(Resource rs : resources)
 		{
 			System.out.println(rs.getDescription());
+		}
+		
+		// 获取http 上的资源
+		resources = resolver.getResources("http://www.baidu.com");
+		
+		for(Resource rs : resources)
+		{
+			System.out.println(rs.getDescription());
+			
+			System.out.println(IOUtils.toString(rs.getInputStream(), "utf-8"));
 		}
 		
 	}
